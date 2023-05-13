@@ -4,9 +4,6 @@ const WebpackPwaManifest = require("webpack-pwa-manifest");
 const path = require("path");
 const { InjectManifest } = require("workbox-webpack-plugin");
 
-// TODO: Add and configure workbox plugins for a service worker and manifest file.
-// TODO: Add CSS loaders and babel to webpack.
-
 module.exports = () => {
   return {
     mode: "development",
@@ -32,6 +29,29 @@ module.exports = () => {
       }),
       // Extract CSS code into separate files for improved performance and better cacheability
       new MiniCssExtractPlugin(),
+      // Injects the specified service worker script (our srs-sw.js file) into the generated service worker file
+      new InjectManifest({
+        swSrc: "./src-sw.js",
+        swDest: "service-worker.js",
+      }),
+      new WebpackPwaManifest({
+        // manifest.json:
+        name: "Text Editor PWA",
+        short_name: "Text-Editor",
+        description:
+          "A single-page application text editor that runs in the browser, stores data to an IndexedDB database, and meets the PWA criteria.",
+        background_color: "#7eb4e2", // background color of the PWA's splash screen
+        theme_color: "#7eb4e2",
+        start_url: "./", // URL that the PWA should load when it is launched
+        publicPath: "./", // path to the root of the assets that the PWA uses. This is used to allow the install option in the Chrome address bar.
+        icons: [
+          {
+            src: path.resolve("src/images/logo.png"),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join("assets", "icons"),
+          },
+        ],
+      }),
     ],
 
     module: {
