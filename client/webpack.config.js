@@ -18,6 +18,12 @@ module.exports = () => {
       filename: "bundle.js",
       path: path.resolve(__dirname, "dist"),
     },
+    devServer: {
+      // port to use for the development server.
+      port: 8081,
+      // The `hot` option is to use the webpack-dev-server in combination with the hot module replacement API.
+      hot: "only",
+    },
     plugins: [
       // Generate an HTML file with the specified template (our index.html) that includes the generated JavaScript and CSS bundles
       new HtmlWebpackPlugin({
