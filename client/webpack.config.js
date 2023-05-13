@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const path = require("path");
 const { InjectManifest } = require("workbox-webpack-plugin");
@@ -18,14 +19,21 @@ module.exports = () => {
       path: path.resolve(__dirname, "dist"),
     },
     plugins: [
+      // Generate an HTML file with the specified template (our index.html) that includes the generated JavaScript and CSS bundles
+      new HtmlWebpackPlugin({
+        template: "./index.html",
+        title: "Webpack Plugin",
+      }),
+      // Extract CSS code into separate files for improved performance and better cacheability
+      new MiniCssExtractPlugin(),
     ],
 
     module: {
       rules: [
-        // to handle images - parses any @import and url() statements in CSS files, resolves them, and injects the resulting CSS into the HTML document.
+        // to handle CSS files - extracts CSS into separate files and resolves any @import and url() statements in CSS files
         {
           test: /\.css$/i,
-          use: ["style-loader", "css-loader"],
+          use: [MiniCssExtractPlugin.loader, "css-loader"],
         },
         // to handle images -  emits images to the output directory and their paths will be injected into the bundles
         {
