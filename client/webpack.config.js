@@ -12,12 +12,10 @@ module.exports = () => {
       install: "./src/js/install.js",
     },
     output: {
-      filename: "bundle.js",
+      filename: "[name].bundle.js",
       path: path.resolve(__dirname, "dist"),
     },
     devServer: {
-      // port to use for the development server.
-      port: 8081,
       // The `hot` option is to use the webpack-dev-server in combination with the hot module replacement API.
       hot: "only",
     },
@@ -31,7 +29,7 @@ module.exports = () => {
       new MiniCssExtractPlugin(),
       // Injects the specified service worker script (our srs-sw.js file) into the generated service worker file
       new InjectManifest({
-        swSrc: "./src-sw.js",
+        swSrc: "./src/src-sw.js",
         swDest: "service-worker.js",
       }),
       new WebpackPwaManifest({
