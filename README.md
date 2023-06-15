@@ -6,6 +6,8 @@
 
 ## Description
 
+![image](client/src/images/jate-project.png)
+
 The main objective of this project is to create a browser-based text editor that meets progressive web application (PWA) standards. The PWA standards require that the text editor has fast performance, can run on any browser, is responsive on any screen size, has a custom offline page, and is installable. To achieve this goal, Abdelrahman utilized an existing codebase and implemented several features such as webpack configurations with plugins and module rules, service workers, and indexedDB for storage. The webpack configurations were defined to format the outputted webpack-built folder. The indexedDB was developed to perform CRUD operations that save data to the database when the user exits the web application or switches focus away from the application window. When the user revisits the webpage, the data is retrieved from the indexedDB and displayed on the application window. By utilizing both the service worker and the indexedDB, the application is able to function offline while also ensuring that data is securely stored. Additionally, the application stores data in the local storage as a backup in case the indexedDB is not supported by the browser. In this project, Abdelrahman learnt the following skills:
 - Configuring webpack to optimize application performance
 - Incorporating appropriate plugins and module rules into the webpack configuration
